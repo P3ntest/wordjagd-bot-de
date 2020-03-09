@@ -89,7 +89,9 @@ public class GameField {
         }
         for (CharPosition relative : getRelatives(at)) {
             if (!containsCharPosition(used, relative)) {
-                if (Character.toLowerCase(getCharOfPosition(relative)) == word.charAt(used.size())) {
+                Character c1 = Character.toLowerCase(getCharOfPosition(relative));
+                Character c2 = Character.toLowerCase(word.charAt(used.size()));
+                if (c1.toString().equalsIgnoreCase(c2.toString())) {
                     List<CharPosition> tempUsed = new ArrayList<>();
                     used.forEach(charPosition1 -> tempUsed.add(charPosition1));
                     tempUsed.add(relative);
