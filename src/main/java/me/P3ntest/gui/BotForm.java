@@ -3,15 +3,13 @@ package me.P3ntest.gui;
 import me.P3ntest.Main;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
-import java.nio.ByteOrder;
 
 public class BotForm extends JFrame {
 
-    JTextArea inputField;
+    JTextField inputField;
     JButton goButton;
-    public JTextField output;
+    public JTextArea output;
 
     public static BotForm _instance;
 
@@ -25,15 +23,19 @@ public class BotForm extends JFrame {
         setLayout(new BorderLayout());
 
         goButton = new JButton("Go!");
-        inputField = new JTextArea();
-        output = new JTextField();
+        inputField = new JTextField();
+        output = new JTextArea();
         output.setColumns(20);
+
+        Font font = new Font("sans-serif", Font.PLAIN, 30);
+        output.setFont(font);
 
         Container container = getContentPane();
 
-        container.add(goButton, BorderLayout.LINE_END);
-        container.add(inputField, BorderLayout.CENTER);
-        container.add(output, BorderLayout.SOUTH);
+        container.add(output, BorderLayout.CENTER);
+        container.add(goButton, BorderLayout.EAST);
+        container.add(inputField, BorderLayout.SOUTH);
+
 
         goButton.addActionListener(actionEvent -> {
             System.out.println(inputField.getText().toLowerCase());

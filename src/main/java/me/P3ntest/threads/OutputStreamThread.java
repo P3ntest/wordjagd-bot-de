@@ -3,25 +3,24 @@ package me.P3ntest.threads;
 import me.P3ntest.game.GameField;
 
 import javax.swing.*;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class OutputStreamThread extends Thread {
 
-    JTextField output;
+    JTextArea output;
     String wordField;
 
-    public OutputStreamThread(JTextField output, String wordField) {
+    public OutputStreamThread(JTextArea output, String wordField) {
         this.output = output;
         this.wordField = wordField;
     }
 
     public void run() {
+        System.out.println("Starting streaming task.");
+
         Character[][] field = new Character[4][4];
 
         int at = 0;
@@ -43,11 +42,17 @@ public class OutputStreamThread extends Thread {
             Scanner fileScanner  = new Scanner(
                     new InputStreamReader(new FileInputStream(words),"ISO-8859-1"));
 
+            int chars = 0;
+            int breakChars = 50;
             while (fileScanner.hasNextLine()) {
                 String word = fileScanner.nextLine();
-                System.out.println(word);
                 if (gameField.containsWord(word.toLowerCase())) {
-                    outputText += word + " ";
+                    outputText += word + "   ";
+                    chars += word.length() + 3;
+                    if (chars >= breakChars) {
+                        chars = 0;
+                        outputText += "\n";
+                    }
                     output.setText(outputText);
                 }
             }
@@ -55,6 +60,8 @@ public class OutputStreamThread extends Thread {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        System.out.println("Finished streaming words.");
     }
 
 }

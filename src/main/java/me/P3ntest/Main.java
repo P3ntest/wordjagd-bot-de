@@ -15,6 +15,7 @@ public class Main {
 
     private static Scanner userInputScanner;
 
+    @Deprecated
     public static List<String> getWordsOfField(String inputField) {
         Character[][] field = new Character[4][4];
 
@@ -50,7 +51,7 @@ public class Main {
 
     static OutputStreamThread currThread = null;
 
-    public static void streamOutput(String inputField, JTextField output) {
+    public static void streamOutput(String inputField, JTextArea output) {
         if (currThread != null) {
             currThread.stop();
         }
