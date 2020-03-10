@@ -38,8 +38,15 @@ public class BotForm extends JFrame {
 
 
         goButton.addActionListener(actionEvent -> {
-            System.out.println(inputField.getText().toLowerCase());
-            Main.streamOutput(inputField.getText().toLowerCase(), output);
+            String input = inputField.getText().toLowerCase();
+            boolean doIt = true;
+            if (input.length() < 16) {
+                doIt = false;
+                JOptionPane.showMessageDialog(null, "Bitte gebe mindestens 16 Zeichen ein.");
+            }
+
+            if (doIt)
+                Main.streamOutput(input, output);
         });
     }
 

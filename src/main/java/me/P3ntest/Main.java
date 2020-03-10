@@ -60,10 +60,17 @@ public class Main {
     }
 
     public static void main(String[] args) {
-
         EventQueue.invokeLater(() -> {
             BotForm botForm = new BotForm();
             botForm.setVisible(true);
+
+            try {
+                UIManager.setLookAndFeel(
+                        UIManager.getSystemLookAndFeelClassName());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         });
 
         userInputScanner = new Scanner(System.in);
