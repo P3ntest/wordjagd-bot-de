@@ -87,13 +87,6 @@ public class Main {
             }
         }
 
-//        Character[][] field = new Character[4][4];
-//        field[0][0] = 'n'; field[1][0] = 'w'; field[2][0] = 'i'; field[3][0] = 'y';
-//        field[0][1] = 'n'; field[1][1] = 'e'; field[2][1] = 'f'; field[3][1] = 'ü';
-//        field[0][2] = 'ü'; field[1][2] = 'n'; field[2][2] = 'c'; field[3][2] = 'h';
-//        field[0][3] = 'e'; field[1][3] = 'u'; field[2][3] = 't'; field[3][3] = 'g';
-
-
         GameField gameField = new GameField(field);
         gameField.printField();
 

@@ -4,8 +4,10 @@ import me.P3ntest.Main;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class BotForm extends JFrame {
+public class BotForm extends JFrame implements KeyListener {
 
     JTextField inputField;
     JButton goButton;
@@ -20,10 +22,15 @@ public class BotForm extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
+        setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
+
         setLayout(new BorderLayout());
 
         goButton = new JButton("Go!");
         inputField = new JTextField();
+
+        inputField.addKeyListener(this);
+
         output = new JTextArea();
         output.setColumns(20);
 
@@ -37,17 +44,35 @@ public class BotForm extends JFrame {
         container.add(inputField, BorderLayout.SOUTH);
 
 
-        goButton.addActionListener(actionEvent -> {
-            String input = inputField.getText().toLowerCase();
-            boolean doIt = true;
-            if (input.length() < 16) {
-                doIt = false;
-                JOptionPane.showMessageDialog(null, "Bitte gebe mindestens 16 Zeichen ein.");
-            }
-
-            if (doIt)
-                Main.streamOutput(input, output);
-        });
+        goButton.addActionListener(actionEvent -> actuated());
     }
 
+    private void actuated() {
+        String input = inputField.getText().toLowerCase();
+        boolean doIt = true;
+        if (input.length() < 16) {
+            doIt = false;
+            JOptionPane.showMessageDialog(null, "Bitte gebe mindestens 16 Zeichen ein.");
+        }
+
+        if (doIt)
+            Main.streamOutput(input, output);
+    }
+
+    @Override
+    public void keyTyped(KeyEvent keyEvent) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent keyEvent) {
+        if (keyEvent.getKeyCode() == 10) {
+            actuated();
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent keyEvent) {
+
+    }
 }
